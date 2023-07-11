@@ -11,7 +11,7 @@ const validationSchemas = {
     params: Joi.object().keys({
       userId: Joi.number().integer().min(1).required()
     })
-  }
+  },
 };
 
 export default validationSchemas;

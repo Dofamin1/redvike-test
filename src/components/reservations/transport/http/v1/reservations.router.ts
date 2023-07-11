@@ -22,15 +22,6 @@ function router(controller: ReservationsController) {
     },
     controller.getReservationsForDate);
 
-    //
-    // fastify.get('/parse-csv', {
-    //       schema: {
-    //         querystring: validationSchemas.getReservationsForUser.querystring,
-    //         response: responsesSchemas.getReservationsForUser
-    //       }
-    // },
-    //     controller.parseCSV)
-
     done();
   };
 }

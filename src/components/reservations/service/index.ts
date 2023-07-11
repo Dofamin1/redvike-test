@@ -3,15 +3,10 @@ import reservationsRepository, { ReservationsRepository } from './reservations.r
 import {
   AmenityId,
   UserId,
-  StartTime,
-  EndTime,
-  ReservationId,
   ReservationDate,
   ReservationByDate,
   ReservationsForUser
 } from './reservations.types';
-import { InfoMessage } from '../../common/types';
-
 
 export class ReservationsService {
   constructor(private readonly reservationsRepository: ReservationsRepository) {
@@ -29,10 +24,6 @@ export class ReservationsService {
     // const user = await this.userRepository.getUserById(userId); //TODO:
     // if (!user) throw new Errors.BadRequest('Passed user does not exists');
     return await this.reservationsRepository.getReservationsForUser(userId);
-  }
-
-  parseReservationsCSV() {
-
   }
 }
 
