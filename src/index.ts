@@ -3,7 +3,7 @@ import initHttpGateway from './gateways/http/http.gateway';
 
 async function start() {
   await connectAllExternalServices();
-  const httpGateway = await initHttpGateway();
+  await initHttpGateway();
 }
 
 start();
