@@ -11,20 +11,19 @@ function router(controller: ReservationsController) {
             params: validationSchemas.getReservationsForUser.params,
             response: responsesSchemas.getReservationsForUser
           }
-        },
-        controller.getReservationsForUser);
+        }, controller.getReservationsForUser
+    );
 
     fastify.get('/by-date', {
-      schema: {
-        querystring: validationSchemas.getReservationsForDate.querystring,
-        response: responsesSchemas.getReservationsForDate
-      }
-    },
-    controller.getReservationsForDate);
+          schema: {
+            querystring: validationSchemas.getReservationsForDate.querystring,
+            response: responsesSchemas.getReservationsForDate
+          }
+        }, controller.getReservationsForDate
+    );
 
     done();
   };
 }
 
 export default router(controller) as FastifyPluginAsync;
-
