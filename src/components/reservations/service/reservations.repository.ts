@@ -27,6 +27,19 @@ export class ReservationsRepository {
 
     return toReservationsForDateDTO(reservations);
   }
+
+  async getReservationsForUser(userId: UserId): Promise<ReservationsForUser | {}> {
+    const reservations = await this.db
+        .select()
+        .from('reservation')
+        .where({ user_id: userId })
+
+    return reservations.reduce((acc, res) => {
+      const resToDTO: ReservationsForUser = toReservationsForUserDTO(res);
+      acc[res.date] ? acc[res.date].push(resToDTO) : acc[res.date] = [resToDTO];
+      return acc;
+    }, {});
+  }
 }
 
 export default new ReservationsRepository(db.getClient());
