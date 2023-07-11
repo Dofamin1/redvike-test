@@ -6,6 +6,14 @@ import controller, { ReservationsController } from './reservations.controller';
 function router(controller: ReservationsController) {
   return (fastify: FastifyInstance, opts: FastifyPluginOptions, done: DoneFuncWithErrOrRes) => {
 
+    fastify.get('/user/:userId', {
+          schema: {
+            params: validationSchemas.getReservationsForUser.params,
+            response: responsesSchemas.getReservationsForUser
+          }
+        },
+        controller.getReservationsForUser);
+
     fastify.get('/by-date', {
       schema: {
         querystring: validationSchemas.getReservationsForDate.querystring,
@@ -14,13 +22,6 @@ function router(controller: ReservationsController) {
     },
     controller.getReservationsForDate);
 
-    // fastify.get('/by-user', {
-    //       schema: {
-    //         querystring: validationSchemas.getReservationsForUser.querystring,
-    //         response: responsesSchemas.getReservationsForUser
-    //       }
-    //     },
-    //     controller.getReservationsForUser);
     //
     // fastify.get('/parse-csv', {
     //       schema: {
