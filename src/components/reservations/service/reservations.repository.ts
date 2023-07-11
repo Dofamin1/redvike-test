@@ -1,13 +1,11 @@
+import Errors from '../../../errors';
 import { toReservationsForDateDTO, toReservationsForUserDTO } from './reservations.dtos';
 import db from '../../../modules/postgresDB';
 import { Knex } from 'knex';
 import {
   AmenityId,
   UserId,
-  ReservationId,
   ReservationDate,
-  StartTime,
-  EndTime,
   ReservationByDate,
   ReservationsForUser
 } from './reservations.types';
@@ -39,6 +37,18 @@ export class ReservationsRepository {
       acc[res.date] ? acc[res.date].push(resToDTO) : acc[res.date] = [resToDTO];
       return acc;
     }, {});
+  }
+
+  async throwIfAmenityMissed(amenityId: AmenityId): Promise<void> {
+    const amenity = await this.db.select('id').from('amenity').where({ id: amenityId }).first();
+
+    if (!amenity) throw new Errors.BadRequest('Amenity does not exists');
+  }
+
+  async throwIfUserMissed(userId: UserId): Promise<void> {
+    const user = await this.db.select('id').from('user').where({ id: userId }).first();
+
+    if (!user) throw new Errors.BadRequest('User does not exists');
   }
 }
 
