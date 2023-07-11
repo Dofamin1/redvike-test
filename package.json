@@ -1,0 +1,55 @@
+{
+  "name": "redvike-test",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "npm run migrate-latest && nodemon ./src/index.ts",
+    "build": "rimraf ./dist && tsc",
+    "start": "npm run migrate-latest && node dist/index.js",
+    "migrate-latest": "knex migrate:latest --knexfile src/modules/postgresDB/knexfile.ts",
+    "migrate-rollback-latest": "knex migrate:rollback --knexfile src/modules/postgresDB/knexfile.ts",
+    "create-migration": "knex migrate:make $npm_config_name --knexfile src/modules/postgresDB/knexfile.ts",
+    "check-types": "tsc --noEmit --pretty",
+    "rebuild-containers-local": "docker-compose -f docker-compose-local.yml up --build -d",
+    "rebuild-containers": "docker-compose up --build -d",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dofamin1/redvike-test"
+  },
+  "author": "Anton Kovalenko",
+  "license": "MIT",
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "bash -c 'npm run check-types'",
+      "eslint --fix"
+    ],
+    "src/**/*.{js,ts,jsx,tsx}": "eslint --fix"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.2.0",
+    "@fastify/multipart": "^7.7.0",
+    "@fastify/swagger": "^8.8.0",
+    "@fastify/swagger-ui": "^1.9.2",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.10.2",
+    "joi": "^17.7.0",
+    "knex": "^2.3.0",
+    "pg": "^8.8.0",
+    "pino": "^8.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/ws": "^8.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.22.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  }
+}
