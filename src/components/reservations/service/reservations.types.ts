@@ -16,9 +16,13 @@ export interface ReservationBaseModel {
   date: ReservationDate;
 }
 
-export interface ReservationFullModel extends ReservationBaseModel {
+export interface ReservationByDate extends ReservationBaseModel {
   readonly amenityName: AmenityName
   readonly duration: ReservationDuration
   readonly updatedAt: Date;
   readonly createdAt: Date;
+}
+
+export interface ReservationsForUser {
+  [date: string] : [Omit<ReservationBaseModel, 'userId' | 'date'>]
 }

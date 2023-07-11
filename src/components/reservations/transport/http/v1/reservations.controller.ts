@@ -12,6 +12,14 @@ export class ReservationsController {
 
     return res.send(reservations);
   };
+
+  getReservationsForUser = async (req, res) => {
+    const { userId } = req.params;
+
+    const reservations = await this.reservationsService.getReservationsForUser(userId);
+
+    return res.send(reservations);
+  };
 }
 
 export default new ReservationsController(reservationsService);

@@ -6,6 +6,11 @@ const validationSchemas = {
       date: Joi.number().integer().min(1000000000).required(),
       amenityId: Joi.number().integer().min(1).required()
     })
+  },
+  getReservationsForUser: {
+    params: Joi.object().keys({
+      userId: Joi.number().integer().min(1).required()
+    })
   }
 };
 
