@@ -11,29 +11,19 @@ function router(controller: ReservationsController) {
             params: validationSchemas.getReservationsForUser.params,
             response: responsesSchemas.getReservationsForUser
           }
-        },
-        controller.getReservationsForUser);
+        }, controller.getReservationsForUser
+    );
 
     fastify.get('/by-date', {
-      schema: {
-        querystring: validationSchemas.getReservationsForDate.querystring,
-        response: responsesSchemas.getReservationsForDate
-      }
-    },
-    controller.getReservationsForDate);
-
-    //
-    // fastify.get('/parse-csv', {
-    //       schema: {
-    //         querystring: validationSchemas.getReservationsForUser.querystring,
-    //         response: responsesSchemas.getReservationsForUser
-    //       }
-    // },
-    //     controller.parseCSV)
+          schema: {
+            querystring: validationSchemas.getReservationsForDate.querystring,
+            response: responsesSchemas.getReservationsForDate
+          }
+        }, controller.getReservationsForDate
+    );
 
     done();
   };
 }
 
 export default router(controller) as FastifyPluginAsync;
-

@@ -1,17 +1,11 @@
-import Errors from '../../../errors';
 import reservationsRepository, { ReservationsRepository } from './reservations.repository';
 import {
   AmenityId,
   UserId,
-  StartTime,
-  EndTime,
-  ReservationId,
   ReservationDate,
   ReservationByDate,
   ReservationsForUser
 } from './reservations.types';
-import { InfoMessage } from '../../common/types';
-
 
 export class ReservationsService {
   constructor(private readonly reservationsRepository: ReservationsRepository) {
@@ -19,20 +13,15 @@ export class ReservationsService {
   }
 
   async getReservationsForDate(date: ReservationDate, amenityId: AmenityId): Promise<[ReservationByDate] | []> {
-    // const amenity = await this.amenityRepository.getAmenityById(amenityId); //TODO:
-    // if (!amenity) throw new Errors.BadRequest('Passed amenity does not exists');
+    await this.reservationsRepository.throwIfAmenityMissed(amenityId);
 
     return await this.reservationsRepository.getReservationsForDate(date, amenityId);
   }
 
   async getReservationsForUser(userId: UserId): Promise<ReservationsForUser>  {
-    // const user = await this.userRepository.getUserById(userId); //TODO:
-    // if (!user) throw new Errors.BadRequest('Passed user does not exists');
+    await this.reservationsRepository.throwIfUserMissed(userId);
+
     return await this.reservationsRepository.getReservationsForUser(userId);
-  }
-
-  parseReservationsCSV() {
-
   }
 }
 

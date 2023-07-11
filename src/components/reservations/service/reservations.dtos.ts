@@ -1,11 +1,6 @@
 import {
-  AmenityId,
-  EndTime,
-  ReservationDate,
   ReservationByDate,
-  ReservationId,
-  StartTime,
-  UserId, ReservationsForUser
+  ReservationsForUser
 } from './reservations.types';
 
 export const toReservationsForDateDTO = (rawData): [ReservationByDate] => rawData.map(r => ({
@@ -25,12 +20,10 @@ export const toReservationsForUserDTO = (rawData): ReservationsForUser => ({
 });
 
 function convertMinutesToHHMM(minutes) {
-  const hours = Math.floor(minutes / 60);
+  const hours: number = Math.floor(minutes / 60);
 
-  // Add leading zeros if necessary
-  const hoursStr = hours.toString().padStart(2, '0');
-  const minutesStr = (minutes % 60).toString().padStart(2, '0');
+  const hoursStr: string = hours.toString().padStart(2, '0');
+  const minutesStr: string  = (minutes % 60).toString().padStart(2, '0');
 
-  // Combine hours and minutes with a colon separator
   return hoursStr + ':' + minutesStr;
 }

@@ -1,6 +1,6 @@
 {
   "name": "redvike-test",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
     "dev": "npm run migrate-latest && nodemon ./src/index.ts",
@@ -29,6 +29,10 @@
   },
   "dependencies": {
     "@fastify/cors": "^8.2.0",
+    "@fastify/multipart": "^7.7.0",
+    "@fastify/swagger": "^8.8.0",
+    "@fastify/swagger-ui": "^1.9.2",
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.0.3",
     "fastify": "^4.10.2",
     "joi": "^17.7.0",
